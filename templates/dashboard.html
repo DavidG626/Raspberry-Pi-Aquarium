@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquarium Monitor - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>Aquarium Temperature Monitor</h1>
+            <button id="theme-toggle" class="theme-btn">Dark Mode</button>
+        </header>
+        
+        <nav class="nav-links">
+            <a href="/">Dashboard</a> | 
+            <a href="/logs">Alert Logs</a> | 
+            <a href="/api/temperature">API Data</a>
+        </nav>
+        
+        <main class="dashboard-content">
+            <section class="current-status">
+                <h2>Current Status</h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <label>Temperature:</label>
+                        <span class="temp-reading">
+                            {% if temp %}
+                                {{ temp }}°F
+                                {% if temp < 76 or temp > 80 %}
+                                    <span class="alert-badge">ALERT</span>
+                                {% else %}
+                                    <span class="ok-badge">GOOD</span>
+                                {% endif %}
+                            {% else %}
+                                No data
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="status-item">
+                        <label>Last Check:</label>
+                        <span class="time-reading">
+                            {% if last_check %}
+                                {{ last_check.strftime('%m/%d/%Y %I:%M %p') }}
+                            {% else %}
+                                Never
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="status-item">
+                        <label>Alerts Today:</label>
+                        <span class="alert-count">{{ alerts_today }}</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="temperature-ranges">
+                <h2>Safe Temperature Range</h2>
+                <div class="range-info">
+                    <p><strong>Minimum:</strong> 76.0°F</p>
+                    <p><strong>Maximum:</strong> 80.0°F</p>
+                    <p><strong>Current Status:</strong> 
+                        {% if temp %}
+                            {% if temp < 76 %}
+                                <span class="status-cold">TOO COLD</span>
+                            {% elif temp > 80 %}
+                                <span class="status-hot">TOO HOT</span>
+                            {% else %}
+                                <span class="status-good">NORMAL</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="status-unknown">UNKNOWN</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </section>
+            
+            <section class="system-info">
+                <h2>System Information</h2>
+                <div class="info-list">
+                    <p>Check Interval: Every 5 minutes</p>
+                    <p>Sensor Type: DS18B20 Waterproof</p>
+                    <p>Tank Size: 55 gallons</p>
+                    <p>Monitoring Since: March 2024</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="main-footer">
+            <p>Aquarium Monitor v1.0 | Running on Raspberry Pi</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Logs - Aquarium Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>Alert Log History</h1>
+            <button id="theme-toggle" class="theme-btn">Dark Mode</button>
+        </header>
+        
+        <nav class="nav-links">
+            <a href="/">Dashboard</a> | 
+            <a href="/logs">Alert Logs</a> | 
+            <a href="/api/temperature">API Data</a>
+        </nav>
+        
+        <main class="logs-content">
+            <section class="logs-header">
+                <h2>Recent Temperature Alerts</h2>
+                <p class="log-info">Showing last 20 alert entries (most recent first)</p>
+            </section>
+            
+            <section class="logs-display">
+                {% if logs %}
+                    <div class="log-table">
+                        <div class="log-header-row">
+                            <span class="log-time">Date & Time</span>
+                            <span class="log-message">Alert Message</span>
+                        </div>
+                        
+                        {% for log in logs[::-1] %}
+                            <div class="log-entry">
+                                {% set log_parts = log.split(' - ', 1) %}
+                                <span class="log-timestamp">{{ log_parts[0] if log_parts|length > 1 else 'Unknown' }}</span>
+                                <span class="log-text">{{ log_parts[1] if log_parts|length > 1 else log.strip() }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no-logs-message">
+                        <h3>No alerts recorded</h3>
+                        <p>Temperature has been within safe range.</p>
+                        <p>Alerts will appear here when temperature goes below 76°F or above 80°F.</p>
+                    </div>
+                {% endif %}
+            </section>
+            
+            <section class="log-actions">
+                <h2>Log Management</h2>
+                <div class="action-buttons">
+                    <button onclick="refreshLogs()" class="action-btn">Refresh Logs</button>
+                    <a href="/api/temperature" class="action-btn">Check Current Status</a>
+                </div>
+                <div class="log-stats">
+                    <p><strong>Total alerts shown:</strong> {{ logs|length if logs else 0 }}</p>
+                    <p><strong>Log file location:</strong> logs/alerts.log</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="main-footer">
+            <p>Alert logs updated in real-time | <a href="/">Back to Dashboard</a></p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script>
+        function refreshLogs() {
+            // Simple page refresh to get latest logs
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

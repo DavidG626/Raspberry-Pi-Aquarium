@@ -1,0 +1,301 @@
+/* Basic reset and variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light mode colors */
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #f5f5f5;
+    --border-color: #cccccc;
+    --link-color: #0066cc;
+    --alert-color: #ff4444;
+    --ok-color: #00aa44;
+    --button-bg: #e6e6e6;
+}
+
+[data-theme="dark"] {
+    /* Dark mode colors */
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --header-bg: #2d2d2d;
+    --border-color: #555555;
+    --link-color: #66aaff;
+    --alert-color: #ff6666;
+    --ok-color: #66cc66;
+    --button-bg: #404040;
+}
+
+/* Basic layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.4;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Header styles */
+.main-header {
+    background-color: var(--header-bg);
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.theme-btn {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.theme-btn:hover {
+    background-color: var(--border-color);
+}
+
+/* Navigation */
+.nav-links {
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-links a {
+    color: var(--link-color);
+    text-decoration: underline;
+    margin-right: 5px;
+}
+
+.nav-links a:hover {
+    text-decoration: none;
+}
+
+/* Dashboard content */
+.dashboard-content {
+    margin-bottom: 30px;
+}
+
+.current-status,
+.temperature-ranges,
+.system-info {
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+}
+
+.current-status h2,
+.temperature-ranges h2,
+.system-info h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+/* Status grid */
+.status-grid {
+    display: table;
+    width: 100%;
+}
+
+.status-item {
+    display: table-row;
+    margin-bottom: 8px;
+}
+
+.status-item label {
+    display: table-cell;
+    font-weight: bold;
+    width: 150px;
+    padding-right: 15px;
+}
+
+.status-item span {
+    display: table-cell;
+}
+
+/* Status badges */
+.alert-badge {
+    color: var(--alert-color);
+    font-weight: bold;
+}
+
+.ok-badge {
+    color: var(--ok-color);
+    font-weight: bold;
+}
+
+.status-cold,
+.status-hot {
+    color: var(--alert-color);
+    font-weight: bold;
+}
+
+.status-good {
+    color: var(--ok-color);
+    font-weight: bold;
+}
+
+.status-unknown {
+    color: #999999;
+    font-style: italic;
+}
+
+/* Range and info sections */
+.range-info p,
+.info-list p {
+    margin-bottom: 5px;
+}
+
+/* Logs page styles */
+.logs-content {
+    margin-bottom: 30px;
+}
+
+.logs-header {
+    margin-bottom: 20px;
+}
+
+.log-info {
+    color: #777777;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.log-table {
+    border: 1px solid var(--border-color);
+    width: 100%;
+}
+
+.log-header-row {
+    background-color: var(--header-bg);
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    font-weight: bold;
+}
+
+.log-time {
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.log-message {
+    flex: 1;
+}
+
+.log-entry {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+}
+
+.log-entry:nth-child(even) {
+    background-color: var(--header-bg);
+}
+
+.log-timestamp {
+    width: 200px;
+    flex-shrink: 0;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.log-text {
+    flex: 1;
+}
+
+.no-logs-message {
+    text-align: center;
+    padding: 40px;
+    border: 1px solid var(--border-color);
+}
+
+.no-logs-message h3 {
+    margin-bottom: 10px;
+    color: var(--ok-color);
+}
+
+/* Action buttons */
+.log-actions {
+    margin-top: 20px;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+}
+
+.action-buttons {
+    margin-bottom: 15px;
+}
+
+.action-btn {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.action-btn:hover {
+    background-color: var(--border-color);
+}
+
+.log-stats p {
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #777777;
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+    color: #777777;
+}
+
+.main-footer a {
+    color: var(--link-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .main-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .log-header-row,
+    .log-entry {
+        flex-direction: column;
+    }
+    
+    .log-time,
+    .log-timestamp {
+        width: auto;
+        margin-bottom: 5px;
+    }
+}
