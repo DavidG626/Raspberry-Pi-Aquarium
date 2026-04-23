@@ -40,7 +40,7 @@ cp .env.example .env
 python app.py
 ```
 
-5. Access dashboard at `http://localhost:5000`
+5. Access dashboard at `http://localhost:5004`
 
 ## Configuration
 
